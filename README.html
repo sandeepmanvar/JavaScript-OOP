@@ -1,0 +1,300 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome file</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="javascript-oop">Javascript-OOP</h1>
+<p>Fundamentals and Example of Javascript with Object Oriented Programming concept</p>
+<h2 id="objects">Objects</h2>
+<p>The simplest way to create an object is using an object literal</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token keyword">const</span> circle <span class="token operator">=</span> <span class="token punctuation">{</span>
+  radius<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  draw<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<p>To create multiple objects with the same structure and behaviuor (methods), use a factory or a constructor.</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token comment">// Factory function</span>
+<span class="token keyword">function</span> <span class="token function">createCircle</span><span class="token punctuation">(</span>radius<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">{</span>
+    radius<span class="token punctuation">,</span>
+    draw<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// Constructor function</span>
+<span class="token keyword">function</span> <span class="token function">Circle</span><span class="token punctuation">(</span>radius<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>radius <span class="token operator">=</span> radius<span class="token punctuation">;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function-variable function">draw</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Every object has a “constructor” property which returns the function that was used to construct or create that object.</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token keyword">const</span> x <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+x<span class="token punctuation">.</span>constructor<span class="token punctuation">;</span> <span class="token comment">// returns Object()</span>
+</code></pre>
+<p>In JavaScript, functions are objects. They have properties and methods.</p>
+<pre class=" language-javascript"><code class="prism  language-javascript">Circle<span class="token punctuation">.</span>name<span class="token punctuation">;</span>
+Circle<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+Circle<span class="token punctuation">.</span>constructor<span class="token punctuation">;</span> <span class="token comment">// returns Function()</span>
+Circle<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// to call the Circle function</span>
+Circle<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>Value types are copied by their value, reference types are copied by their reference.</li>
+<li>Value types in JavaScript are: String, Number, Boolean, Symbol, undefined and null</li>
+<li>Reference types are: Object, Function and Array</li>
+</ul>
+<p>JavaScript objects are dynamic. You can add/remove properties:</p>
+<pre class=" language-javascript"><code class="prism  language-javascript">circle<span class="token punctuation">.</span>location <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+circle<span class="token punctuation">[</span><span class="token string">"location"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">delete</span> circle<span class="token punctuation">.</span>location<span class="token punctuation">;</span>
+</code></pre>
+<p>To enumerate the members in an object:</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> key <span class="token keyword">in</span> circle<span class="token punctuation">)</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> circle<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>circle<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>To see if an object has a given property</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">'location'</span> <span class="token keyword">in</span> circle<span class="token punctuation">)</span>
+</code></pre>
+<p>Abstraction means hiding the complexity/details and showing only the essentials. We can hide the details by using private members. Replace “this” with “let”.</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token keyword">function</span> <span class="token function">Circle</span><span class="token punctuation">(</span>radius<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// Public member</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>radius <span class="token operator">=</span> radius<span class="token punctuation">;</span>
+
+  <span class="token comment">// Private member</span>
+  <span class="token keyword">let</span> defaultLocation <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>To define a getter/setter, use Object.defineProperty()</p>
+<pre class=" language-javascript"><code class="prism  language-javascript">Object<span class="token punctuation">.</span><span class="token function">defineProperty</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token string">"defaultLocation"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  <span class="token keyword">get</span><span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> defaultLocation<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token keyword">set</span><span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    defaultLocation <span class="token operator">=</span> value<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="prototypes">Prototypes</h2>
+<p>Every object (except the root object) has a prototype (parent).</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token comment">// To get the prototype of an object:</span>
+Object<span class="token punctuation">.</span><span class="token function">getPrototypeOf</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>In Chrome, you can inspect “<strong>proto</strong>” property. But you should not use that in the code.</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token comment">// To get the attributes of a property:</span>
+Object<span class="token punctuation">.</span><span class="token function">getOwnPropertyDescriptor</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> <span class="token string">"propertyName"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// To set the attributes for a property:</span>
+Object<span class="token punctuation">.</span><span class="token function">defineProperty</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> <span class="token string">"propertyName"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  configurable<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token comment">// cannot be deleted</span>
+  writable<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  enumerable<span class="token punctuation">:</span> <span class="token boolean">false</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>Constructors have a “prototype” property. It returns the object that will be used as the prototype for objects created by the constructor.</p>
+<pre class=" language-javascript"><code class="prism  language-javascript">Object<span class="token punctuation">.</span>prototype <span class="token operator">===</span> Object<span class="token punctuation">.</span><span class="token function">getPrototypeOf</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Array<span class="token punctuation">.</span>prototype <span class="token operator">===</span> Object<span class="token punctuation">.</span><span class="token function">getPrototypeOf</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>All objects created with the same constructor will have the same prototype. A single instance of this prototype will be stored in the memory.</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token keyword">const</span> x <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> y <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+Object<span class="token punctuation">.</span><span class="token function">getPrototypeOf</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token operator">===</span> Object<span class="token punctuation">.</span><span class="token function">getPrototypeOf</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// returns true</span>
+</code></pre>
+<p>Any changes to the prototype will be immediately visible to all objects referencing this prototype.</p>
+<p>When dealing with large number of objects, it’s better to put their methods on their prototype. This way, a single instance of the methods will be in the memory.</p>
+<pre class=" language-javascript"><code class="prism  language-javascript">Circle<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">draw</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<p>To get the own/instance properties:</p>
+<pre class=" language-javascript"><code class="prism  language-javascript">Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>To get all the properties (own + prototype):</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> key <span class="token keyword">in</span> obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="inheritance">Inheritance</h2>
+<h5 id="prototypical-inheritance">Prototypical Inheritance</h5>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token keyword">function</span> <span class="token function">Shape</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token keyword">function</span> <span class="token function">Circle</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token comment">// Prototypical inheritance</span>
+Circle<span class="token punctuation">.</span>prototype <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>Shape<span class="token punctuation">.</span>prototype<span class="token punctuation">)</span><span class="token punctuation">;</span>
+Circle<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>constructor <span class="token operator">=</span> Circle<span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">Rectangle</span><span class="token punctuation">(</span>color<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// To call the super constructor</span>
+  Shape<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h5 id="method-overriding">Method overriding</h5>
+<pre class=" language-javascript"><code class="prism  language-javascript">Shape<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">draw</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+Circle<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">draw</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// Call the base implementation</span>
+  Shape<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>draw<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Do additional stuff here</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<p>Don’t create large inheritance hierarchies. One level of inheritance is fine.</p>
+<p>Use mixins to combine multiple objects and implement composition in JavaScript.</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token keyword">const</span> canEat <span class="token operator">=</span> <span class="token punctuation">{</span>
+  eat<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> canWalk <span class="token operator">=</span> <span class="token punctuation">{</span>
+  walk<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">mixin</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span> <span class="token operator">...</span>sources<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// Copies all the properties from all the source objects</span>
+  <span class="token comment">// to the target object.</span>
+  Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span> <span class="token operator">...</span>sources<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">Person</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token function">mixin</span><span class="token punctuation">(</span>Person<span class="token punctuation">.</span>prototype<span class="token punctuation">,</span> canEat<span class="token punctuation">,</span> canWalk<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="polymorphism">Polymorphism</h2>
+<pre><code>function HtmlElement() {
+  this.click = function() {
+    console.log('clicked');
+  }
+}
+
+HtmlElement.prototype.focus = function(){
+  console.log('focued');
+}
+
+function HtmlSelectElement(items = []) {
+  this.items = items;
+
+  this.addItem = function(item) {
+    this.items.push(item);
+  }
+
+  this.removeItem = function(item) {
+    this.items.splice(this.items.indexOf(item), 1);
+  }
+
+  this.render = function() {
+    return `
+    &lt;select&gt;${this.items.map(item =&gt; `
+      &lt;option&gt;${item}&lt;/option&gt;`).join('')}
+    &lt;/select&gt;`;
+  }
+}
+HtmlSelectElement.prototype = new HtmlElement();
+HtmlSelectElement.prototype.constructor = HtmlSelectElement;
+
+function HtmlImageElement(src) {
+  this.src = src;
+
+  this.render = function() {
+    return `&lt;img src="${this.src}" /&gt;`
+  }
+}
+HtmlImageElement.prototype = new HtmlElement();
+HtmlImageElement.prototype.constructor = HtmlImageElement;
+
+const elements = [
+  new HtmlSelectElement([1, 2, 3]),
+  new HtmlImageElement('http://')
+];
+
+for (let element of elements)
+  console.log(element.render());
+
+</code></pre>
+<h2 id="classes">Classes</h2>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token keyword">class</span> <span class="token class-name">Circle</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span>radius<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>radius <span class="token operator">=</span> radius<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// These methods will be added to the prototype.</span>
+  <span class="token function">draw</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+  <span class="token comment">// This will be available on the Circle class (Circle.parse())</span>
+  <span class="token keyword">static</span> <span class="token function">parse</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Using symbols to implement private properties and methods</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token keyword">const</span> _size <span class="token operator">=</span> <span class="token function">Symbol</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> _draw <span class="token operator">=</span> <span class="token function">Symbol</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Square</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span>size<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// "Kind of" private property</span>
+    <span class="token keyword">this</span><span class="token punctuation">[</span>_size<span class="token punctuation">]</span> <span class="token operator">=</span> size<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// "Kind of" private method</span>
+  <span class="token punctuation">[</span>_draw<span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+  <span class="token comment">// By "kind of" I mean: these properties and methods are essentally</span>
+  <span class="token comment">// part of the object and are accessible from the outside. But accessing</span>
+  <span class="token comment">// them is hard and awkward.</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Using WeakMaps to implement private properties and methods</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token keyword">const</span> _width <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">WeakMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Rectangle</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span>width<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    _width<span class="token punctuation">.</span><span class="token keyword">set</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> width<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">draw</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Rectangle with width"</span> <span class="token operator">+</span> _width<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>WeakMaps give us better protection than symbols. There is no way to access private members implemented using WeakMaps from the outside of an object.</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token comment">// Inheritance</span>
+<span class="token keyword">class</span> <span class="token class-name">Triangle</span> <span class="token keyword">extends</span> <span class="token class-name">Shape</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span>color<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// To call the base constructor</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span>color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">draw</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Call the base method</span>
+    <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">draw</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// Do some other stuff here</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="modules">Modules</h2>
+<h4 id="module-formats">Module formats</h4>
+<ul>
+<li>AMD / Asynchronous Module Definition (Browser)</li>
+<li>CommonJS (Node)</li>
+<li>UMD / Universal Module Definition (Browser + Node)</li>
+<li>ES6 Modules</li>
+</ul>
+<h4 id="commonjs-used-in-node">CommonJS (Used in Node)</h4>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token comment">// Exporting</span>
+module<span class="token punctuation">.</span>exports<span class="token punctuation">.</span>Cirlce <span class="token operator">=</span> Circle<span class="token punctuation">;</span>
+<span class="token comment">// Importing</span>
+<span class="token keyword">const</span> Circle <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"./circle"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="es6-modules-used-in-browser">ES6 Modules (Used in Browser)</h4>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token comment">// Exporting</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Square</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token comment">// Importing</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Square <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"./square"</span><span class="token punctuation">;</span>
+</code></pre>
+<p>We use Babel to transpile our modern JavaScript code into code that browsers can understand (typically ES5).</p>
+<p>We use Webpack to combine our JavaScript files into a bundle.</p>
+</div>
+</body>
+
+</html>
